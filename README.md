@@ -1,6 +1,6 @@
-# VEHICLE ROUTING PROBLEM
+# VEHICLE ROUTING PROBLEM solver tool
 
-## Video Demo: <URL HERE>
+## Video Demo: https://youtu.be/waHRrTyVWCs
 
 ## Description:
 The **VRP Solver** is a web-based application designed to address various forms of the Vehicle Routing Problem (VRP). It allows users to define customer locations and vehicle details to compute optimal delivery or pickup routes. Using real-world geographic coordinates, it calculates distances between locations based on geodesic measurements and solves routing challenges using Google's OR-Tools. The tool supports visualization of results for better understanding and analysis.
