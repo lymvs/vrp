@@ -1,0 +1,17 @@
+/* Change the default active tab color */
+.nav-link {
+    background-color: #f8f9fa;
+    color: #000000;
+}
+
+/* Change the default active tab color */
+.nav-link.active {
+    background-color: #ced4da !important; /* Background color for active tab */
+    color: #000000 !important;           /* Text color for active tab */
+}
+
+/* Optional: Add hover effects */
+.nav-link:hover {
+    background-color: #495057;           /* Darker shade on hover */
+    color: #ffffff !important;
+}
