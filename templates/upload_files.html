@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Upload files
+{% endblock %}
+
+{% block main %}
+
+    <div class="container mt-2">
+        <h1 class="mb-4">Step 1: Upload Files</h1>
+        
+        <p>In order to solve the Vehicle Routing Problem (VRP), two CSV files needs to be uploaded:</p>
+        <ul>
+            <li><strong>Customers Data:</strong> Contains information about customer locations, demands, and time windows (if applicable).</li>
+            <li><strong>Vehicles Data:</strong> Contains information about the vehicles in the fleet, including vehicle capacities.</li>
+        </ul>
+
+        <p>Make sure your files are in CSV format and match the required structure (Please refer to the relevant <a href="/#file-requirements">section</a>). 
+            If you're unsure about the format, you can download the <a href="/static/sample_customers.csv">sample customers file</a> and <a href="/static/sample_vehicles.csv">sample vehicles file</a> to use as a template.</p>
+
+        <form action="/upload_files" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                {% for file, text in files_list.items() %}
+                    <label for="formFile" class="form-label">{{ text }}</label>
+                    <input class="form-control" type="file" id="{{ file }}" name="{{ file }}" accept=".csv">
+                    <br>
+                {% endfor %}
+            </div>
+            
+            <button type="submit" class="btn btn-secondary">Upload Files</button>
+        </form>
+
+        <div class="alert alert-warning mt-2" role="alert">
+            Note: Both files need to be uploaded!
+        </div>
+
+        <hr>
+
+        <p class="mt-4">Once you upload your files, you can proceed to select the problem type (VRP, CVRP, VRPTW, etc.) and solve it.</p>
+
+    </div>
+
+{% endblock %}

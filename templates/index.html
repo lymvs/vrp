@@ -1,0 +1,165 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-fluid mt-2">
+
+        <!-- Introduction Section -->
+        <div class="row mb-4">
+            <h1 class="mb-4 text-center">Welcome to the VRP Solver</h1>
+
+            <p class="lead text-center">
+                The <abbr title="Vehicle Routing Problem">VRP</abbr> is a classic optimization problem that involves finding the most efficient routes for a fleet of vehicles to service a set of locations. It has widespread applications in logistics, delivery services, transportation planning, and more.
+            </p>
+
+            <p class="text-center">
+                Whether you're optimizing delivery routes for a small fleet or dealing with complex constraints like vehicle capacities, this app provides a simple yet powerful solution to help you minimize travel time and costs.
+            </p>
+
+            <p class="text-center">
+                <a href="https://en.wikipedia.org/wiki/Vehicle_routing_problem" target="_blank" class="btn btn-info">Learn more about VRP on Wikipedia</a>
+            </p>
+        </div>
+
+        <hr>
+        
+        <!-- VRP Variations Section -->
+        <div class="row mb-4">
+            <h2>Supported Problems</h2>
+
+            <ul>
+                <li><strong>VRP (Vehicle Routing Problem):</strong> Optimize the routes for a fleet of vehicles, minimizing the overall distance or travel time to visit all customer locations.</li>
+                <li><strong>CVRP (Capacitated VRP):</strong> A variant of VRP where each vehicle has a limited capacity. This requires taking into account the amount of goods each vehicle can carry while determining the optimal routes.</li>
+                <li><strong>VRPTW (Vehicle Routing Problem with Time Windows):</strong> VRP with the added constraint that each customer must be visited within a specific time window. <i>(Coming Soon)</i></li>
+                <li><strong>VRPPD (Vehicle Routing Problem with Pick-up and Delivery):</strong> A variant where each customer has both pick-up and delivery demands, and the route must respect this pairing. <i>(Coming Soon)</i></li>
+                <li><strong>VRPB (Vehicle Routing Problem with Backhauls):</strong> A variant where vehicles must first complete the delivery tasks before performing any pick-ups (backhauls). <i>(Coming Soon)</i></li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <!-- File Upload Section -->
+         <div class="container mt-2">
+
+            <h2 id="file-requirements">CSV File Requirements</h2>
+            
+            <div class="row mb-4">
+                <p>Please ensure your CSV files contain the following columns for each problem type:</p>
+
+                <h3>Customers File</h3>
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Column Name</th>
+                            <th>Description</th>
+                            <th>Required for</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr>
+                            <td>customer_id</td>
+                            <td>Unique identifier for the customer</td>
+                            <td>All solvers</td>
+                        </tr> -->
+                        <tr>
+                            <td>latitude</td>
+                            <td>Geographical latitude of the customer</td>
+                            <td>All solvers (if using geodesic distance)</td>
+                        </tr>
+                        <tr>
+                            <td>longitude</td>
+                            <td>Geographical longitude of the customer</td>
+                            <td>All solvers (if using geodesic distance)</td>
+                        </tr>
+                        <tr>
+                            <td>demand</td>
+                            <td>The amount of goods the customer needs to be delivered</td>
+                            <td>CVRP, VRPTW, VRPPD, VRPB</td>
+                        </tr>
+                        <tr>
+                            <td>time_window_start</td>
+                            <td>Time window start for when a customer can be visited (in minutes) <i>(Coming Soon)</i></td>
+                            <td>VRPTW</td>
+                        </tr>
+                        <tr>
+                            <td>time_window_end</td>
+                            <td>Time window end for when a customer can be visited (in minutes) <i>(Coming Soon)</i></td>
+                            <td>VRPTW</td>
+                        </tr>
+                        <tr>
+                            <td>pick_up_location</td>
+                            <td>Specify if the customer is a pick-up location <i>(Coming Soon)</i></td>
+                            <td>VRPPD, VRPB</td>
+                        </tr>
+                        <tr>
+                            <td>delivery_location</td>
+                            <td>Specify if the customer is a delivery location <i>(Coming Soon)</i></td>
+                            <td>VRPPD, VRPB</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row mb-4">
+                <h3>Vehicles File</h3>
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Column Name</th>
+                            <th>Description</th>
+                            <th>Required for</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>vehicle_id</td>
+                            <td>Unique identifier for the vehicle</td>
+                            <td>All solvers</td>
+                        </tr>
+                        <tr>
+                            <td>capacity</td>
+                            <td>The vehicle's capacity to carry goods</td>
+                            <td>CVRP, VRPPD, VRPB</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <hr>
+    
+        <div class="row mb-4">
+            <h2>How to Use</h2>
+            <ol>
+                <li>Click <strong>Get Started</strong> or go to the <strong>Upload</strong> page.</li>
+                <li>Upload the required CSV files (customers and vehicles). You can download sample CSV files from the download buttons below.</li>
+                <li>Click <strong>Upload Files</strong>.</li>
+                <li>Select the problem type (e.g., VRP, CVRP, VRPTW, etc.) you wish to solve.</li>
+                <li>Click <strong>Solve</strong> to run the solver and get optimized routes.</li>
+                <li>View your results, including routes, distances, and vehicle loads, on the results page.</li>
+                <!-- <li>Visualize the routes on an interactive graph.</li> -->
+            </ol>
+
+            <p class="text-center">
+                <a href="/static/sample_customers.csv" class="btn btn-secondary">Download Sample Customers File</a>
+                <a href="/static/sample_vehicles.csv" class="btn btn-secondary">Download Sample Vehicles File</a>
+            </p>
+
+            <div class="text-center mt-4">
+                <a href="/upload_files" class="btn btn-primary btn-lg">Get Started</a>
+            </div>
+
+            <div class="alert alert-info mt-4" role="alert">
+                Note: This application calculates the distance matrix using <a href="https://en.wikipedia.org/wiki/Geodesic" target="_blank">geodesic</a> distances, which represent the shortest path between two points on the Earth's surface (as the crow flies). 
+                These distances may differ from real-world road distances but are ideal for demonstrating the solver's capabilities.
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

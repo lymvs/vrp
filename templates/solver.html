@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Solver
+{% endblock %}
+
+{% block main %}
+
+    <div class="container mt-2">
+        <h1 class="mb-4">Step 2: Select VRP Variation</h1>
+
+        <p>Before you proceed:</p>
+        <ol>
+            <li>Select the type of Vehicle Routing Problem (VRP) you want to solve from the options below.</li>
+            <li>Ensure the uploaded CSV files contain the correct data and columns for the selected solver.</li>
+            <li>Click Solve to initiate the computation. The results, including optimized routes, will be displayed on the next page.</li>
+        </ol>
+
+        <form action="/solver" method="post">
+
+            <p>Please select the <strong>VRP variation</strong>:</p>
+
+            <!--vrp_variations = {descr: [abbr, active/disabled]}-->
+            {% for descr, info in vrp_variations.items() %}
+
+                {% if info[1] == "disabled" %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id={{ info[0] }} name="vrp_variation" value={{ info[0] }} disabled>
+                        <label class="form-check-label" for={{ info[0] }}>
+                            {{ descr }} <span class="badge bg-secondary">Coming Soon</span>
+                        </label><br>
+                    </div>
+                {% else %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id={{ info[0] }} name="vrp_variation" value={{ info[0] }}>
+                        <label class="form-check-label" for={{ info[0] }}>
+                            {{ descr }}
+                        </label><br>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+
+            <br>
+
+            <input class="btn btn-secondary" type="submit" value="Solve">
+
+        </form>
+
+    </div>
+
+{% endblock %}
